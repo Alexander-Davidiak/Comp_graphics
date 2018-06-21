@@ -46,7 +46,7 @@ window.onload = function(){
 	scene.add(floor);
 
 	var box_geometry = new THREE.BoxBufferGeometry( 100, 100, 100 );
-	var box_material = new THREE.MeshStandardMaterial({color:0XBC8F8F, wireframe: false});
+	var box_material = new THREE.MeshStandardMaterial({color:0xCD853F, wireframe: false});
 	var box = new THREE.Mesh(box_geometry, box_material);
 	box.castShadow = true; 
 	box.receiveShadow = true;
@@ -62,8 +62,30 @@ window.onload = function(){
 	cone.receiveShadow = true;
 	scene.add( cone );
 
+	var cylinder_geometry = new THREE.CylinderGeometry( 5, 5, 50, 32 );
+	var cylinder_material = new THREE.MeshBasicMaterial( {color: 0x8B4513} );
+	var cylinder = new THREE.Mesh( cylinder_geometry, cylinder_material );
+	cylinder.position.set(35, 125, 0);
+	cylinder.castShadow = true; 
+	cylinder.receiveShadow = true;
+	scene.add( cylinder );
 
-	
+	var door_geometry = new THREE.BoxBufferGeometry( 40, 70, 1 );
+	var door_material = new THREE.MeshStandardMaterial({color:0x8B4513, wireframe: false});
+	var door = new THREE.Mesh(door_geometry, door_material);
+	door.position.set(0, 35, 50);
+	scene.add(door);
+
+	var win_geometry = new THREE.BoxBufferGeometry( 40, 40, 1 );
+	var win_material = new THREE.MeshStandardMaterial({color:0x6495ED, wireframe: false});
+	var win = new THREE.Mesh(win_geometry, win_material);
+	var win2 = new THREE.Mesh(win_geometry, win_material);
+	win.position.set(-49.7, 50, 0);
+	win2.position.set(49.7, 50, 0);
+	win.rotation.y = Math.PI/2;
+	win2.rotation.y = Math.PI/2;
+	scene.add(win);
+	scene.add(win2);
 
 	
 
