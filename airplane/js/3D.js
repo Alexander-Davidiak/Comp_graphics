@@ -271,7 +271,12 @@ function updatePlane(){
 
 	airplane.mesh.position.y += (targetY-airplane.mesh.position.y)*0.1;
 	airplane.mesh.position.x += (targetX-airplane.mesh.position.x)*0.1;
-	airplane.propeller.rotation.x += 0.3;
+
+	airplane.mesh.rotation.z = (targetY-airplane.mesh.position.y)*0.0128;
+	airplane.mesh.rotation.y = (airplane.mesh.position.x-targetX)*0.0128+ Math.PI/2;
+
+
+	airplane.propeller.rotation.x += 0.4;
 }
 
 function normalize(v,vmin,vmax,tmin, tmax){
