@@ -31,7 +31,7 @@ function createScene() {
 
 	scene = new THREE.Scene();
 
-	scene.fog = new THREE.Fog(0xf7d9aa, 100, 950);
+	scene.fog = new THREE.Fog(0xFFE4B5, 100, 950);
 	
 	aspectRatio = WIDTH / HEIGHT;
 	fieldOfView = 60;
@@ -76,8 +76,8 @@ var hemisphereLight, shadowLight;
 
 function createLights() {
 	hemisphereLight = new THREE.HemisphereLight(0xaaaaaa,0x000000, .9)
-	
 	shadowLight = new THREE.DirectionalLight(0xffffff, .9);
+	ambientLight = new THREE.AmbientLight(0xdc8874, .5);
 
 	shadowLight.position.set(150, 350, 350);
 	
@@ -95,6 +95,7 @@ function createLights() {
 	
 	scene.add(hemisphereLight);  
 	scene.add(shadowLight);
+	scene.add(ambientLight);
 }
 
 Sea = function(){
@@ -129,7 +130,7 @@ function createSea(){
 Cloud = function(){
 	this.mesh = new THREE.Object3D();
 	
-	var geom = new THREE.BoxGeometry(20,20,20);
+	var geom = new THREE.SphereGeometry( 20, 7, 5 );
 	
 	var mat = new THREE.MeshPhongMaterial({
 		color:Colors.white,  
@@ -265,13 +266,11 @@ function loop(){
 }
 
 function updatePlane(){
-
-	
 	var targetX = normalize(mousePos.x, -1, 1, -100, 100);
 	var targetY = normalize(mousePos.y, -1, 1, 25, 175);
 
-	airplane.mesh.position.y = targetY;
-	airplane.mesh.position.x = targetX;
+	airplane.mesh.position.y += (targetY-airplane.mesh.position.y)*0.1;
+	airplane.mesh.position.x += (targetX-airplane.mesh.position.x)*0.1;
 	airplane.propeller.rotation.x += 0.3;
 }
 
