@@ -62,8 +62,8 @@ window.onload = function(){
 	cone.receiveShadow = true;
 	scene.add( cone );
 
-	var cylinder_geometry = new THREE.CylinderGeometry( 5, 5, 50, 32 );
-	var cylinder_material = new THREE.MeshBasicMaterial( {color: 0x8B4513} );
+	var cylinder_geometry = new THREE.CylinderGeometry( 20, 20, 50, 32 );
+	var cylinder_material = new THREE.MeshStandardMaterial( {color: 0x8B4513} );
 	var cylinder = new THREE.Mesh( cylinder_geometry, cylinder_material );
 	cylinder.position.set(35, 125, 0);
 	cylinder.castShadow = true; 

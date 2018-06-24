@@ -46,13 +46,13 @@ var Key = {
 	D: 68,
 	S: 83,
 
-	isDown: function(keyCode){return this._pressed[keyCode]},
-	onKeydown: function(event){this._pressed[event.keyCode]=true},
+	isDown: function(keyCode){return this._pressed[keyCode];},
+	onKeydown: function(event){this._pressed[event.keyCode]=true;},
 	onKeyup: function(event){delete this._pressed[event.keyCode]}
 }
 
-	window.addEventListener('keyup', function(event){Key.onKeyup(event)},false);
-	window.addEventListener('onKeydown', function(event){Key.onKeydown(event)},false);
+	window.addEventListener('keyup', function(event){Key.onKeyup(event);},false);
+	window.addEventListener('keydown', function(event){Key.onKeydown(event);},false);
 
 
 
@@ -71,9 +71,28 @@ var Key = {
 	scene.add(Cube);
 
 function dynamo(){
-	if(Key.isDown(Key.A)){Cube.mesh.position.x -=30};
-	if(Key.isDown(Key.D)){Cube.position.x +=30};
-	if(Key.isDown(Key.W)){Cube.position.y +=30};
+	var rotY = 0;
+	if(Key.isDown(Key.A)){
+		rotY =Math.PI/200;
+		Cube.position.x -=1;
+		Cube.rotation.y += rotY;
+			
+	}
+	if(Key.isDown(Key.D)){
+		rotY =Math.PI/200;
+		Cube.position.x +=1;
+		Cube.rotation.y -= rotY;
+	}
+	if(Key.isDown(Key.W)){
+		rotY =Math.PI/200;
+		Cube.position.y +=1;
+		Cube.rotation.x += rotY;
+	}
+	if(Key.isDown(Key.S)){
+		rotY =Math.PI/200;
+		Cube.position.y -=1;
+		Cube.rotation.x -= rotY;
+	}
 }
 
 

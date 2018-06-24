@@ -16,7 +16,7 @@ function init(event){
 	createSea();
 	createSky();
 
-	document.addEventListener('mousemove', handleMouseMove, false);
+	//document.addEventListener('mousemove', handleMouseMove, false);
 	
 	loop();
 }
@@ -259,6 +259,7 @@ function loop(){
 	sea.mesh.rotation.x += .005;
 	sky.mesh.rotation.x += .01;
 
+
 	updatePlane();
 	
 	renderer.render(scene, camera);
@@ -266,8 +267,8 @@ function loop(){
 }
 
 function updatePlane(){
-	var targetX = normalize(mousePos.x, -1, 1, -100, 100);
-	var targetY = normalize(mousePos.y, -1, 1, 25, 175);
+	/*var targetX = normalize(mousePos.x, -1, 1, -100, 100);
+	ar targetY = normalize(mousePos.y, -1, 1, 25, 175);
 
 	airplane.mesh.position.y += (targetY-airplane.mesh.position.y)*0.1;
 	airplane.mesh.position.x += (targetX-airplane.mesh.position.x)*0.1;
@@ -275,10 +276,40 @@ function updatePlane(){
 	airplane.mesh.rotation.z = (targetY-airplane.mesh.position.y)*0.0128;
 	airplane.mesh.rotation.y = (airplane.mesh.position.x-targetX)*0.0128+ Math.PI/2;
 
+*/
+
+	var rotY = 0;
+	if(Key.isDown(Key.A)){
+		rotY =Math.PI/200;
+		airplane.mesh.position.x -=1;
+		airplane.mesh.rotation.y += rotY;
+			
+	}
+	if(Key.isDown(Key.D)){
+		rotY =Math.PI/200;
+		airplane.mesh.position.x +=1;
+		airplane.mesh.rotation.y -= rotY;
+	}
+	if(Key.isDown(Key.W)){
+		rotY =Math.PI/200;
+		airplane.mesh.position.y +=1;
+		airplane.mesh.rotation.x += rotY;
+	}
+	if(Key.isDown(Key.S)){
+		rotY =Math.PI/200;
+		airplane.mesh.position.y -=1;
+		airplane.mesh.rotation.x -= rotY;
+	}
+
+	//if(airplane.mesh.rotation.x != 0){
+	//	airplane.mesh.rotation.x = 0;
+	//}
+
 
 	airplane.propeller.rotation.x += 0.4;
-}
 
+}
+/*
 function normalize(v,vmin,vmax,tmin, tmax){
 
 	var nv = Math.max(Math.min(v,vmax), vmin);
@@ -301,5 +332,23 @@ function handleMouseMove(event) {
 	mousePos = {x:tx, y:ty};
 
 }
+*/
 
-renderer.render(scene, camera);
+var Key = {
+	_pressed: {},
+
+	A: 65,
+	W: 87,
+	D: 68,
+	S: 83,
+
+	isDown: function(keyCode){return this._pressed[keyCode];},
+	onKeydown: function(event){this._pressed[event.keyCode]=true;},
+	onKeyup: function(event){delete this._pressed[event.keyCode]}
+}
+
+	window.addEventListener('keyup', function(event){Key.onKeyup(event);},false);
+	window.addEventListener('keydown', function(event){Key.onKeydown(event);},false);
+
+
+
